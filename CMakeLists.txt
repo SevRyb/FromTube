@@ -13,6 +13,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Multimedia REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Multimedia REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS MultimediaWidgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS MultimediaWidgets REQUIRED)
+
 
 set(EXTERNALS "${CMAKE_SOURCE_DIR}/ext")
 
@@ -36,6 +41,8 @@ file(GLOB_RECURSE PROJECT_SOURCES
 
 
 #========== Setup Executable ==========#
+#file(COPY "python/" DESTINATION "scripts")
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(FromTube
         MANUAL_FINALIZATION
@@ -63,6 +70,8 @@ target_include_directories(FromTube PRIVATE ${INCLUDE_DIR})
 target_include_directories(FromTube PRIVATE ${SOURCE_DIR})
 
 target_link_libraries(FromTube PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(FromTube PRIVATE Qt${QT_VERSION_MAJOR}::Multimedia)
+target_link_libraries(FromTube PRIVATE Qt${QT_VERSION_MAJOR}::MultimediaWidgets)
 
 target_link_libraries(FromTube PRIVATE
     pybind11::embed pybind11::module pybind11::pybind11

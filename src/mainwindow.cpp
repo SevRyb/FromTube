@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 //#include <Python.h>
 //#include <pybind11/embed.h>
+#include <QMediaPlayer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
@@ -12,11 +13,18 @@ MainWindow::MainWindow(QWidget *parent)
     //m_mainVBoxLay->setMargin(0);
     setLayout(m_mainVBoxLay);
 
+
+
     /* Media Area */
     m_videoWidget = new QVideoWidget(this);
+    m_videoWidget->setFixedSize(500, 300);
+
     m_videoHBoxLay = new QHBoxLayout();
     m_videoHBoxLay->setMargin(0);
-    m_videoHBoxLay->addWidget(m_videoWidget);
+    m_videoHBoxLay->setSpacing(0);
+    m_videoHBoxLay->addWidget(m_videoWidget, 1, Qt::AlignCenter);
+    m_videoHBoxLay->addWidget(new QLabel("Hello", this));
+
     m_videoFrame = new QFrame(this);
     m_videoFrame->setLayout(m_videoHBoxLay);
 
@@ -82,7 +90,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     /* Layouts */
-    m_mainVBoxLay->addWidget(m_videoFrame);
+    m_mainVBoxLay->addWidget(m_videoFrame, 1);
     m_mainVBoxLay->addWidget(new QLabel("Page url", this));
     m_mainVBoxLay->addWidget(m_pageUrlFrame);
     m_mainVBoxLay->addWidget(new QLabel("Direct url", this));
@@ -97,6 +105,10 @@ MainWindow::MainWindow(QWidget *parent)
     m_mainVBoxLay->addWidget(new QLabel("Log", this));
     m_mainVBoxLay->addWidget(m_logTextEdit);
 
+    QMediaPlayer *media_player = new QMediaPlayer(this);
+    media_player->setMedia(QUrl::fromLocalFile("S:\\MyWork\\Programming\\Python\\Projects\\FromTube_cmd\\Mistmorn – дідько, я у розпачі...-ixPavrJMxRk.mp4"));
+    media_player->setVideoOutput(m_videoWidget);
+    media_player->play();
 
     //connect(btn, &QPushButton::pressed, this, &MainWindow::findUrl);
 }

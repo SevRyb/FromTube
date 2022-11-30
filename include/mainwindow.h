@@ -18,7 +18,6 @@ class MainWindow : public QWidget
 {
     Q_OBJECT
 
-    void findUrl();
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
@@ -27,8 +26,12 @@ private:
 
     /* Media Area */
     QVideoWidget *m_videoWidget;
-    QHBoxLayout *m_videoHBoxLay;
+    //QHBoxLayout *m_videoHBoxLay;
     QFrame *m_videoFrame;
+
+    //QFrame *m_controlsFrame;
+    QHBoxLayout *m_controlsHBoxLay;
+    QPushButton *m_playBtn;
 
     /* Page Url Area */
     QLineEdit *m_pageUrlLEdit;
@@ -64,6 +67,9 @@ private:
 
     /* Log Text */
     QTextEdit *m_logTextEdit;
+
+private  Q_SLOTS:
+    void findUrl();
 
 
 };

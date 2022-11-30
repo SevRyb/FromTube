@@ -2,12 +2,17 @@
 //#include <Python.h>
 //#include <pybind11/embed.h>
 #include <QMediaPlayer>
+#include <QFont>
 
 MainWindow::MainWindow(QWidget *parent)
     : QWidget(parent)
 {
 
-    resize(600, 600);
+    QFont f = font();
+    f.setPointSize(10);
+    setFont(f);
+
+    resize(700, 600);
 
     m_mainVBoxLay = new QVBoxLayout();
     //m_mainVBoxLay->setMargin(0);
@@ -17,16 +22,19 @@ MainWindow::MainWindow(QWidget *parent)
 
     /* Media Area */
     m_videoWidget = new QVideoWidget(this);
-    m_videoWidget->setFixedSize(500, 300);
+    m_videoWidget->setFixedSize(width(), 300);
+    //m_videoWidget->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 
-    m_videoHBoxLay = new QHBoxLayout();
-    m_videoHBoxLay->setMargin(0);
-    m_videoHBoxLay->setSpacing(0);
-    m_videoHBoxLay->addWidget(m_videoWidget, 1, Qt::AlignCenter);
-    m_videoHBoxLay->addWidget(new QLabel("Hello", this));
+//    m_videoHBoxLay = new QHBoxLayout();
+//    m_videoHBoxLay->setMargin(0);
+//    m_videoHBoxLay->setSpacing(0);
+//    m_videoHBoxLay->addWidget(m_videoWidget, 1, Qt::AlignCenter);
+//    m_videoHBoxLay->addWidget(new QPushButton("▶", this));
 
-    m_videoFrame = new QFrame(this);
-    m_videoFrame->setLayout(m_videoHBoxLay);
+    //m_videoFrame = new QFrame(this);
+    //m_videoFrame->setLayout(m_videoHBoxLay);
+
+    m_playBtn = new QPushButton("▶", this);
 
     /* Page Url Area */
     m_pageUrlLEdit = new QLineEdit(this);
@@ -56,15 +64,16 @@ MainWindow::MainWindow(QWidget *parent)
     m_mediaFormatGridLay->setMargin(0);
     m_mediaFormatGridLay->setColumnStretch(0, 1);
     m_mediaFormatGridLay->setColumnStretch(2, 1);
-    m_mediaFormatGridLay->setColumnStretch(4, 1);
+    //m_mediaFormatGridLay->setColumnStretch(4, 1);
     m_mediaFormatGridLay->addWidget(new QLabel("Audio", this), 0, 0);
     m_mediaFormatGridLay->addWidget(new QLabel("Video", this), 0, 2);
-    m_mediaFormatGridLay->addWidget(new QLabel("Out", this), 0, 4);
+    //m_mediaFormatGridLay->addWidget(new QLabel("Out", this), 0, 4);
     m_mediaFormatGridLay->addWidget(m_audioFormatComboBox, 1, 0);
     m_mediaFormatGridLay->addWidget(new QLabel("+", this), 1, 1, Qt::AlignCenter);
     m_mediaFormatGridLay->addWidget(m_videoFormatComboBox, 1, 2);
     m_mediaFormatGridLay->addWidget(new QLabel("=", this), 1, 3, Qt::AlignCenter);
-    m_mediaFormatGridLay->addWidget(m_outFormatComboBox, 1, 4);
+    m_mediaFormatGridLay->addWidget(new QLabel("Mixed", this), 2, 0);
+    m_mediaFormatGridLay->addWidget(m_outFormatComboBox, 3, 0);
     m_mediaFormatFrame = new QFrame(this);
     m_mediaFormatFrame->setLayout(m_mediaFormatGridLay);
 
@@ -86,11 +95,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     /* Download Button */
     m_downloadBtn = new QPushButton("Download", this);
-    m_downloadBtn->setFixedSize(80, 40);
+    m_downloadBtn->setFixedSize(100, 40);
 
 
     /* Layouts */
-    m_mainVBoxLay->addWidget(m_videoFrame, 1);
+    m_mainVBoxLay->addWidget(m_videoWidget);
+    m_mainVBoxLay->addWidget(m_playBtn, 0, Qt::AlignHCenter);
     m_mainVBoxLay->addWidget(new QLabel("Page url", this));
     m_mainVBoxLay->addWidget(m_pageUrlFrame);
     m_mainVBoxLay->addWidget(new QLabel("Direct url", this));
@@ -106,7 +116,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_mainVBoxLay->addWidget(m_logTextEdit);
 
     QMediaPlayer *media_player = new QMediaPlayer(this);
-    media_player->setMedia(QUrl::fromLocalFile("S:\\MyWork\\Programming\\Python\\Projects\\FromTube_cmd\\Mistmorn – дідько, я у розпачі...-ixPavrJMxRk.mp4"));
+    media_player->setMedia(QUrl::fromLocalFile("S:\\MyWork\\Programming\\Python\\Projects\\FromTube_cmd\\Segmented Displays-RTB5XhjbgZA.webm"));
     media_player->setVideoOutput(m_videoWidget);
     media_player->play();
 

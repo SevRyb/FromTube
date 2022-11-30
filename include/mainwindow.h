@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QTextEdit>
 #include <QComboBox>
+#include <QSlider>
 #include <QLabel>
 #include <QVideoWidget>
 #include <QVBoxLayout>
@@ -22,7 +23,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private:
-    QVBoxLayout *m_mainVBoxLay;
+    //QVBoxLayout *m_mainVBoxLay;
+    QGridLayout *m_mainGridLay;
 
     /* Media Area */
     QVideoWidget *m_videoWidget;
@@ -31,27 +33,29 @@ private:
 
     //QFrame *m_controlsFrame;
     QHBoxLayout *m_controlsHBoxLay;
+    QSlider *m_durationSlider;
     QPushButton *m_playBtn;
 
     /* Page Url Area */
     QLineEdit *m_pageUrlLEdit;
     QPushButton *m_findBtn;
-    QHBoxLayout *m_pageUrlHBoxLay;
-    QFrame *m_pageUrlFrame;
+
 
     /* Direct Url Area */
-    QLineEdit *m_directUrlLEdit;
-    QPushButton *m_copyBtn;
-    QHBoxLayout *m_directUrlHBoxLay;
-    QFrame *m_directUrlFrame;
+//    QLineEdit *m_directUrlLEdit;
+//    QPushButton *m_copyBtn;
+//    QHBoxLayout *m_directUrlHBoxLay;
+//    QFrame *m_directUrlFrame;
 
     /* Format Area */
+    QPushButton *m_chooseAudioBtn;
+    QPushButton *m_chooseVideoBtn;
+    QPushButton *m_chooseMixedBtn;
     QComboBox *m_audioFormatComboBox;
     QComboBox *m_videoFormatComboBox;
     QComboBox *m_outFormatComboBox;
-    //QHBoxLayout *m_mediaFormatHBoxLay;
     QGridLayout *m_mediaFormatGridLay;
-    QFrame *m_mediaFormatFrame;
+
 
     /* File Name */
     QLineEdit *m_fileNameLEdit;
@@ -59,8 +63,8 @@ private:
     /* Download Dir Area */
     QLineEdit *m_downloadDirLEdit;
     QPushButton *m_openBtn;
-    QHBoxLayout *m_downloadDirHBoxLay;
-    QFrame *m_downloadDirFrame;
+//    QHBoxLayout *m_downloadDirHBoxLay;
+//    QFrame *m_downloadDirFrame;
 
     /* Download Button */
     QPushButton *m_downloadBtn;
